@@ -1,8 +1,8 @@
 主要是理解Spring IOC( Inversion of Control)/DI(Dependency Injection)
 
-ioc的优点
+ioc的优点：
 
-资源不由资源的使用者管理，而由不使用资源的第三方管理，这可以带来很多好处。
+资源不是由资源的使用者管理，而是由不使用资源的第三方管理，这可以带来很多好处
 * 第一，资源集中管理，实现资源的可配置和易管理。
 * 第二，降低了使用资源方的依赖程度，也就是我们说的耦合度。
 
@@ -18,10 +18,11 @@ ioc的优点
 
 -----
 
-对人物，人物的属性抽象
+对人物，剧本的抽象
 
-角色是革离， 具体的演员很多（比如：先找演员试演），其中一个来试演的是刘德华
-```
+角色是革离，具体的演员很多（比如：先找演员试演），其中一个来试演的是刘德华
+
+```java
 
 public class Geli {
     // 有一个回答士兵的方法
@@ -41,7 +42,8 @@ public class LiuDeHua extends Geli{
 ```
 
 事件是： 城门口回复士兵的话“来者何人”
-```
+
+```java
 public interface MoAttack {
 	void cityGateAsk();
 }
@@ -51,7 +53,7 @@ public interface MoAttack {
 
 * 剧本设计 1 
 
-```
+```java
 public class MoAttackImpl_1 implements MoAttack {
 
 	@Override
@@ -68,7 +70,7 @@ public class MoAttackImpl_1 implements MoAttack {
 
 * 剧本设计 2
 
-```
+```java
 public class MoAttackImpl_2 implements MoAttack {
 
 	@Override
@@ -86,7 +88,7 @@ public class MoAttackImpl_2 implements MoAttack {
 
 * 剧本设计 3
 
-```
+```java
 public class MoAttackImpl_3 implements MoAttack {
 
 	private Geli geli;
@@ -115,7 +117,7 @@ public class MoAttackImpl_3 implements MoAttack {
 
 所以最后可以如下设计：
 
-```
+```java
 public interface ActorArrangable {
 	  void injectGeli(Geli geli);  
 }
@@ -171,7 +173,7 @@ MoAttack 与 LiuDeHua 实现了解耦，即 MoAttack 不需要关注 角色 Geli
 
 ----
 
-参考
+参考:
 
 作者：jinnianshilongnian
 http://jinnianshilongnian.iteye.com/blog/1413846

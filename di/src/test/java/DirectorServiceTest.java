@@ -3,8 +3,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mogong.service.Director;
 
-//Dependency Injection
-//Inverse of Control
+/**
+ * Dependency Injection
+ * Inverse of Control
+ */
 public class DirectorServiceTest {
 
     /**
