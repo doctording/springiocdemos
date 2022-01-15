@@ -19,7 +19,6 @@ public class DirectorServiceTest {
                 new ClassPathXmlApplicationContext("beans.xml");
 
         Director director = (Director) ctx.getBean("director");
-
         director.direct();
 
         ctx.destroy();

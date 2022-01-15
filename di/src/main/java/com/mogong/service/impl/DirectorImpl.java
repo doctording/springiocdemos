@@ -15,7 +15,7 @@ public class DirectorImpl implements Director {
 	public void direct(){
 		System.out.println("剧本开始....");
 		moAttack.cityGateAsk();
-		System.out.println("剧本结束");
+		System.out.println("....剧本结束");
    }
 
 	public MoAttack getMoAttack() {

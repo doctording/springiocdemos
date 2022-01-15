@@ -160,10 +160,21 @@ MoAttack 与 LiuDeHua 实现了解耦，即 MoAttack 不需要关注 角色 Geli
 
 ----
 
-上述的第三方机构就是Spring 容器，各种关系交给Spring 容器来管理， 自动完成类的初始化和依赖注入（DI）。
+上述的第三方机构就是Spring 容器，各种关系交给Spring 容器来管理，自动完成类的初始化和依赖注入（DI）。如下图所示
 
+```java
+<bean id="geli" class="com.mogong.model.impl.LiuDeHua"/>
 
-项目工程代码，见code文件夹
+<bean id="moAttack" class="com.mogong.dao.impl.MoAttackImpl">
+    <property name="geli" ref="geli">
+    </property>
+</bean>
+
+<bean id="director" class="com.mogong.service.impl.DirectorImpl">
+    <property name="moAttack" ref="moAttack">
+    </property>
+</bean>
+```
 
 目录以及运行图如下
 
