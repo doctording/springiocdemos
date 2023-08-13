@@ -193,9 +193,7 @@ MoAttack 与 LiuDeHua 实现了解耦，即 MoAttack 不需要关注 角色 Geli
 
 加入一个制片人在选定剧本后，想通过第三方机构确定: 演员，导演（导演也可以选择），能够实现 剧本，演员，导演，三者的全部解耦。
 
-----
-
-上述的第三方机构就是Spring 容器，各种关系交给Spring 容器来管理，自动完成类的初始化和依赖注入（DI）。如下图所示
+**上述的第三方机构就是Spring容器**，各种关系交给Spring容器来管理，自动完成类的初始化和依赖注入（DI）。如下图所示
 
 ```java
 <bean id="geli" class="com.mogong.model.impl.LiuDeHua"/>
@@ -213,7 +211,7 @@ MoAttack 与 LiuDeHua 实现了解耦，即 MoAttack 不需要关注 角色 Geli
 
 目录以及运行图如下
 
-![](./imgs/peizhi.jpg)
+![](../springiocdemos/imgs/peizhi.jpg)
 
 ![](./imgs/rs.jpg)
 
