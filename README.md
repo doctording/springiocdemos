@@ -115,52 +115,85 @@ public class MoAttackImpl_3 implements MoAttack {
 
 ----
 
-所以最后可以如下设计：
+**所以最后可以如下设计：**
+
+1. 抽象角色、剧本、导演
+
+```java
+public interface Geli {
+	void responseAsk(String content);
+}
+```
 
 ```java
 public interface ActorArrangable {
-	  void injectGeli(Geli geli);  
+	void injectGeli(Geli geli);  
 }
+```
+
+```java
+public interface Director {
+	void direct();
+}
+```
 
 
-public class MoAttack implements ActorArrangable{
+2. 剧本的实现：剧本所需的真正的Geli对象是注入过来，不用关心具体Geli的扮演者是谁，可以是任何人
+   
+```java
+public class MoAttackImpl implements MoAttack {
 
-	private Geli geli;  
-	 
+	/**
+	 * 剧本需要的角色
+	 */
+	private Geli geli;
+
 	@Override
-	public void injectGeli(Geli geli) {
+	public void cityGateAsk() {
+        	geli.responseAsk("墨者革离");
+	}
+
+	public Geli getGeli() {
+		return geli;
+	}
+
+	public void setGeli(Geli geli) {
 		this.geli = geli;
 	}
-	
-	public void cityGateAsk() {  
-        	geli.responseAsk("墨者革离");  
-    	}  
 }
+```
 
-public class Director {
+3. 导演的实现：只要有剧本开始导演就行，剧本也是注入过来的
+
+```java
+public class DirectorImpl implements Director {
 	
-	public void direct(){  
-		// 1 指定角色的扮演者  
-	       Geli geli = new LiuDeHua();    
+	// 注入剧本
+	MoAttack moAttack;
 
-		// 2 注入具体扮演者
-	       MoAttack moAttack = new MoAttack();
-	       moAttack.injectGeli(geli);
+	@Override
+	public void direct(){
+		System.out.println("剧本开始....");
+		moAttack.cityGateAsk();
+		System.out.println("....剧本结束");
+   	}
 
-	       // 3 人物剧本执行
-	       moAttack.cityGateAsk();
-   	}  
+	public MoAttack getMoAttack() {
+		return moAttack;
+	}
+
+	public void setMoAttack(MoAttack moAttack) {
+		this.moAttack = moAttack;
+	}  
 	
 }
 ```
 
 MoAttack 与 LiuDeHua 实现了解耦，即 MoAttack 不需要关注 角色 Geli 的实现类的实例化工作，实现好自己的逻辑就行了，但是这些实例化工作仍然存在，只是交给了 Director 类。(Inversion of Control, 控制反转)
 
-加入一个制片人在选定剧本后，想通过第三方机构确定:演员，导演（导演也可以选择），能够实现 剧本，演员，导演，三者的全部解耦。
+加入一个制片人在选定剧本后，想通过第三方机构确定: 演员，导演（导演也可以选择），能够实现 剧本，演员，导演，三者的全部解耦。
 
-----
-
-上述的第三方机构就是Spring 容器，各种关系交给Spring 容器来管理，自动完成类的初始化和依赖注入（DI）。如下图所示
+**上述的第三方机构就是Spring容器**，各种关系交给Spring容器来管理，自动完成类的初始化和依赖注入（DI）。如下图所示
 
 ```java
 <bean id="geli" class="com.mogong.model.impl.LiuDeHua"/>
@@ -178,7 +211,7 @@ MoAttack 与 LiuDeHua 实现了解耦，即 MoAttack 不需要关注 角色 Geli
 
 目录以及运行图如下
 
-![](./imgs/peizhi.jpg)
+![](../springiocdemos/imgs/peizhi.jpg)
 
 ![](./imgs/rs.jpg)
 
