@@ -7,7 +7,7 @@ import com.mogong.model.Geli;
  * @Author mubi
  * @Date 2022/1/15 12:04
  */
-public class LiuDeHua extends Geli {
+public class LiuDeHua implements Geli {
 
 	@Override
 	public void responseAsk(String content){
